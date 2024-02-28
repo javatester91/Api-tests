@@ -22,5 +22,9 @@ namespace Api_tests
 
         public static string support_text = "To keep ReqRes free, contributions towards server costs are appreciated!";
 
+        public static int pageList = 1;
+        public static int per_page = 6;
+        public static int pageTotal = 12;
+        public static int total_pages = 2;
     }
 }
