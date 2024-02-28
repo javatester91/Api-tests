@@ -24,7 +24,7 @@ namespace Api_tests.JsonClasses
 
         public string last_name { get; set; }
 
-        public Uri Avatar { get; set; }
+        public string avatar { get; set; }
     }
 
     public partial class Support
