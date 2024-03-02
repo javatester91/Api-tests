@@ -30,5 +30,8 @@ namespace Api_tests
 
         public static string new_user_first_name = "Kir";
         public static string new_user_job = "QA";
+
+        public static string update_user_first_name = "Lee";
+        public static string update_user_job = "Auto QA";
     }
 }

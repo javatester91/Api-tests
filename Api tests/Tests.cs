@@ -63,5 +63,17 @@ namespace Api_tests
             Assert.That(result.job, Is.EqualTo(Data.new_user_job));
         }
 
+        [Test]
+        [Description("Запрос на обновление клиента")]
+        public void UpdateUser()
+        {
+            myUri = new Uri(adress + "users/1");
+            string json = Methods.PutRequest(myUri);
+            var result = JsonConvert.DeserializeObject<CreateUser>(json);
+            var status = Methods.StatusPutRequest(myUri);
+            Assert.That(status.ToString(), Is.EqualTo("OK"));
+            Assert.That(result!.name, Is.EqualTo(Data.update_user_first_name));
+            Assert.That(result.job, Is.EqualTo(Data.update_user_job));
+        }
     }
 }

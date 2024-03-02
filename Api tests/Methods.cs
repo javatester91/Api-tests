@@ -54,7 +54,7 @@ namespace Api_tests
             return json;
         }
 
-        // Получение статуса Get запроса
+        // Получение статуса Post запроса
         // На вход принимает URl запроса
         // Возвращает StatusCode запроса
         public static HttpStatusCode StatusPostRequest(Uri myUri)
@@ -96,6 +96,66 @@ namespace Api_tests
                 {
                     name = "Kir",
                     job = "QA"
+                });
+
+                streamWriter.Write(jsonBody);
+            }
+
+            WebResponse myWebResponse = myWebRequest.GetResponse();
+            Stream responseStream = myWebResponse.GetResponseStream();
+            StreamReader myStreamReader = new StreamReader(responseStream);
+            string json = myStreamReader.ReadToEnd();
+
+            responseStream.Close();
+            myWebResponse.Close();
+
+            Console.WriteLine(json);
+
+            return json;
+        }
+
+        // Получение статуса Post запроса
+        // На вход принимает URl запроса
+        // Возвращает StatusCode запроса
+        public static HttpStatusCode StatusPutRequest(Uri myUri)
+        {
+            try
+            {
+                WebRequest myWebRequest = HttpWebRequest.Create(myUri);
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)myWebRequest;
+
+                myHttpWebRequest.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+                HttpWebResponse response = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                myHttpWebRequest.Method = "PUT";
+
+                return response.StatusCode;
+            }
+            catch (WebException ex)
+            {
+                var resp = (HttpWebResponse)ex.Response;
+                Console.WriteLine(resp.StatusCode);
+                return resp.StatusCode;
+            }
+        }
+
+        // Post запрос
+        // На вход принимает URl запроса
+        // Возвращает Json в формате string
+        public static string PutRequest(Uri myUri)
+        {
+            WebRequest myWebRequest = HttpWebRequest.Create(myUri);
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)myWebRequest;
+
+            myHttpWebRequest.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            myHttpWebRequest.Method = "PUT";
+            myHttpWebRequest.ContentType = "application/json";
+            using (var streamWriter = new StreamWriter(myHttpWebRequest.GetRequestStream()))
+            {
+                string jsonBody = JsonConvert.SerializeObject(new
+                {
+                    name = "Lee",
+                    job = "Auto QA"
                 });
 
                 streamWriter.Write(jsonBody);
