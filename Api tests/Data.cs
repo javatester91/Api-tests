@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +27,8 @@ namespace Api_tests
         public static int per_page = 6;
         public static int pageTotal = 12;
         public static int total_pages = 2;
+
+        public static string new_user_first_name = "Kir";
+        public static string new_user_job = "QA";
     }
 }
